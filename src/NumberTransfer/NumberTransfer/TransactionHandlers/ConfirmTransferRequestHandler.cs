@@ -8,7 +8,7 @@ using Types;
 namespace NumberTransfer.TransactionHandlers
 {
     // This class is basically the same as RequestTransferHandler
-    public class ConfirmTransferRequestHandler : ITransactionHandler, ITransactionHandler<ConfirmTransferRequest>
+    public class ConfirmTransferRequestHandler : TransactionHandlerBase<ConfirmTransferRequest>
     {
         private readonly TransactionTokenValidationService _transactionTokenValidationService;
         private readonly ICallNumberRepository _callNumberRepository;
@@ -20,13 +20,9 @@ namespace NumberTransfer.TransactionHandlers
             _callNumberRepository = callNumberRepository;
         }
 
-        public async Task<ResponseCheckTx> CheckTx(TransactionToken transactionToken, object data, RequestCheckTx request, ServerCallContext context)
+        protected override async Task<ResponseCheckTx> CheckTx(TransactionToken transactionToken, ConfirmTransferRequest payload, RequestCheckTx request,
+            ServerCallContext context)
         {
-            if (!(data is ConfirmTransferRequest payload))
-            {
-                return ResponseHelper.Check.NoPayload();
-            }
-
             var callNumber = await _callNumberRepository.Get(payload.PhoneNumber);
 
             if (callNumber == null)
@@ -52,13 +48,9 @@ namespace NumberTransfer.TransactionHandlers
             return ResponseHelper.Check.Ok();
         }
 
-        public async Task<ResponseDeliverTx> DeliverTx(TransactionToken transactionToken, object data, RequestDeliverTx request, ServerCallContext context)
+        protected override async Task<ResponseDeliverTx> DeliverTx(TransactionToken transactionToken, ConfirmTransferRequest payload, RequestDeliverTx request,
+            ServerCallContext context)
         {
-            if (!(data is ConfirmTransferRequest payload))
-            {
-                return ResponseHelper.Deliver.NoPayload();
-            }
-
             var callNumber = await _callNumberRepository.Get(payload.PhoneNumber);
 
             if (callNumber == null)
@@ -79,7 +71,7 @@ namespace NumberTransfer.TransactionHandlers
 
             return ResponseHelper.Deliver.Ok();
         }
-        
+
         private bool IsVerifiedCaller(TransactionToken token, string owner)
         {
             _transactionTokenValidationService.Validate(token, owner);

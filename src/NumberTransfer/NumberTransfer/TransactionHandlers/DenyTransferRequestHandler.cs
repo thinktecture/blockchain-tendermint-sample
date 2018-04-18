@@ -7,7 +7,7 @@ using Types;
 
 namespace NumberTransfer.TransactionHandlers
 {
-    public class DenyTransferRequestHandler : ITransactionHandler, ITransactionHandler<DenyTransferRequest>
+    public class DenyTransferRequestHandler : TransactionHandlerBase<DenyTransferRequest>
     {
         private readonly TransactionTokenValidationService _transactionTokenValidationService;
         private readonly ICallNumberRepository _callNumberRepository;
@@ -19,13 +19,9 @@ namespace NumberTransfer.TransactionHandlers
             _callNumberRepository = callNumberRepository;
         }
 
-        public async Task<ResponseCheckTx> CheckTx(TransactionToken transactionToken, object data, RequestCheckTx request, ServerCallContext context)
+        protected override async Task<ResponseCheckTx> CheckTx(TransactionToken transactionToken, DenyTransferRequest payload, RequestCheckTx request,
+            ServerCallContext context)
         {
-            if (!(data is DenyTransferRequest payload))
-            {
-                return ResponseHelper.Check.NoPayload();
-            }
-
             var callNumber = await _callNumberRepository.Get(payload.PhoneNumber);
 
             if (callNumber == null)
@@ -58,13 +54,9 @@ namespace NumberTransfer.TransactionHandlers
             return token.IsValid;
         }
 
-        public async Task<ResponseDeliverTx> DeliverTx(TransactionToken transactionToken, object data, RequestDeliverTx request, ServerCallContext context)
+        protected override async Task<ResponseDeliverTx> DeliverTx(TransactionToken transactionToken, DenyTransferRequest payload, RequestDeliverTx request,
+            ServerCallContext context)
         {
-            if (!(data is DenyTransferRequest payload))
-            {
-                return ResponseHelper.Deliver.NoPayload();
-            }
-
             var callNumber = await _callNumberRepository.Get(payload.PhoneNumber);
 
             if (callNumber == null)

@@ -9,7 +9,7 @@ using Types;
 
 namespace NumberTransfer.TransactionHandlers
 {
-    public class CreateNumberHandler : ITransactionHandler, ITransactionHandler<CreateNumber>
+    public class CreateNumberHandler : TransactionHandlerBase<CreateNumber>
     {
         private readonly TransactionTokenValidationService _transactionTokenValidationService;
         private readonly ICallNumberRepository _callNumberRepository;
@@ -31,18 +31,14 @@ namespace NumberTransfer.TransactionHandlers
             return token.IsValid;
         }
 
-        public async Task<ResponseCheckTx> CheckTx(TransactionToken transactionToken, object data, RequestCheckTx request, ServerCallContext context)
+        protected override async Task<ResponseCheckTx> CheckTx(TransactionToken transactionToken, CreateNumber payload, RequestCheckTx request,
+            ServerCallContext context)
         {
             if (!IsVerifiedCaller(transactionToken))
             {
                 return ResponseHelper.Check.Unauthorized();
             }
-
-            if (!(data is CreateNumber payload))
-            {
-                return ResponseHelper.Check.NoPayload();
-            }
-
+            
             _logger.LogInformation("Received valid CheckTx request");
 
             var result = await _callNumberRepository.Get(payload.PhoneNumber);
@@ -51,18 +47,14 @@ namespace NumberTransfer.TransactionHandlers
             return ResponseHelper.Check.Create(result == null ? CodeType.Ok : CodeType.PhoneNumberAlreadyExists, result == null ? "" : "Phonenumber already exists.");
         }
 
-        public async Task<ResponseDeliverTx> DeliverTx(TransactionToken transactionToken, object data, RequestDeliverTx request, ServerCallContext context)
+        protected override async Task<ResponseDeliverTx> DeliverTx(TransactionToken transactionToken, CreateNumber payload, RequestDeliverTx request,
+            ServerCallContext context)
         {
             if (!IsVerifiedCaller(transactionToken))
             {
                 return ResponseHelper.Deliver.Unauthorized();
             }
-
-            if (!(data is CreateNumber payload))
-            {
-                return ResponseHelper.Deliver.NoPayload();
-            }
-
+            
             _logger.LogInformation("Received valid DeliverTx request");
 
             await _callNumberRepository.Add(new CallNumber()

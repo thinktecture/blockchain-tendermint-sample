@@ -9,7 +9,7 @@ using Types;
 namespace NumberTransfer.TransactionHandlers
 {
     // TODO: Do we need to check currentOwner somehow?
-    public class RequestTransferHandler : ITransactionHandler, ITransactionHandler<RequestTransfer>
+    public class RequestTransferHandler : TransactionHandlerBase<RequestTransfer>
     {
         private readonly TransactionTokenValidationService _transactionTokenValidationService;
         private readonly ICallNumberRepository _callNumberRepository;
@@ -24,13 +24,9 @@ namespace NumberTransfer.TransactionHandlers
             _logger = logger;
         }
 
-        public async Task<ResponseCheckTx> CheckTx(TransactionToken transactionToken, object data, RequestCheckTx request, ServerCallContext context)
+        protected override async Task<ResponseCheckTx> CheckTx(TransactionToken transactionToken, RequestTransfer payload, RequestCheckTx request,
+            ServerCallContext context)
         {
-            if (!(data is RequestTransfer payload))
-            {
-                return ResponseHelper.Check.NoPayload();
-            }
-
             if (!IsVerifiedCaller(transactionToken, payload.NewOwner))
             {
                 return ResponseHelper.Check.Unauthorized();
@@ -62,13 +58,9 @@ namespace NumberTransfer.TransactionHandlers
             return token.IsValid;
         }
 
-        public async Task<ResponseDeliverTx> DeliverTx(TransactionToken transactionToken, object data, RequestDeliverTx request, ServerCallContext context)
+        protected override async Task<ResponseDeliverTx> DeliverTx(TransactionToken transactionToken, RequestTransfer payload, RequestDeliverTx request,
+            ServerCallContext context)
         {
-            if (!(data is RequestTransfer payload))
-            {
-                return ResponseHelper.Deliver.NoPayload();
-            }
-
             if (!IsVerifiedCaller(transactionToken, payload.NewOwner))
             {
                 return ResponseHelper.Deliver.Unauthorized();
