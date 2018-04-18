@@ -1,0 +1,17 @@
+<div class="tt__card">
+  <header>
+    <h1>Party: {{ party }}</h1>
+  </header>
+  <div class="content">
+    <p>
+      You are now acting as {{ party }}.<br/>
+      Please use the UI below to execute some transactions.
+    </p>
+  </div>
+</div>
+
+<app-create-number *ngIf="party === 'Regulator'"></app-create-number>
+<app-request-transfer></app-request-transfer>
+<app-confirm-transfer-request></app-confirm-transfer-request>
+<app-deny-transfer-request></app-deny-transfer-request>
+<app-query></app-query>

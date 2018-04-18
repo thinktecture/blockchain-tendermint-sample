@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.0.0
+MinimumVisualStudioVersion = 10.0.0.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tendermint", "..\Tendermint\Tendermint.csproj", "{04AC0665-07B2-4F0D-B82F-98B13E1F7A18}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DebugRequestCreator", "DebugRequestCreator\DebugRequestCreator.csproj", "{0FCC2DD8-4F63-4EB7-BB10-CD4C78C9D00A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumberTransfer", "NumberTransfer\NumberTransfer.csproj", "{93038B2F-AE53-4802-B80B-CCA65B08692E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumberTransferWebApi", "NumberTransferWebApi\NumberTransferWebApi.csproj", "{DBFE8B64-5E87-4856-8BBC-402725DEC295}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{04AC0665-07B2-4F0D-B82F-98B13E1F7A18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04AC0665-07B2-4F0D-B82F-98B13E1F7A18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04AC0665-07B2-4F0D-B82F-98B13E1F7A18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04AC0665-07B2-4F0D-B82F-98B13E1F7A18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FCC2DD8-4F63-4EB7-BB10-CD4C78C9D00A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FCC2DD8-4F63-4EB7-BB10-CD4C78C9D00A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FCC2DD8-4F63-4EB7-BB10-CD4C78C9D00A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FCC2DD8-4F63-4EB7-BB10-CD4C78C9D00A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93038B2F-AE53-4802-B80B-CCA65B08692E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93038B2F-AE53-4802-B80B-CCA65B08692E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93038B2F-AE53-4802-B80B-CCA65B08692E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93038B2F-AE53-4802-B80B-CCA65B08692E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBFE8B64-5E87-4856-8BBC-402725DEC295}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBFE8B64-5E87-4856-8BBC-402725DEC295}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBFE8B64-5E87-4856-8BBC-402725DEC295}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBFE8B64-5E87-4856-8BBC-402725DEC295}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

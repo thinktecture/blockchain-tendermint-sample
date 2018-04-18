@@ -1,0 +1,20 @@
+<app-card title="Create Number">
+  <p>
+    Create a new phone number.
+  </p>
+
+  <form novalidate (ngSubmit)="createNumber()">
+    <div class="tt__input tt__input--text">
+      <label for="owner">Owner</label>
+      <input type="text" id="owner" name="owner" required [(ngModel)]="owner">
+    </div>
+    <div class="tt__input tt__input--text">
+      <label for="phoneNumber">Phone Number</label>
+      <input type="text" id="phoneNumber" name="phoneNumber" required [(ngModel)]="phoneNumber">
+    </div>
+
+    <button class="tiny" type="submit">Execute</button>
+  </form>
+
+  <app-pretty-json [result]="httpResult$ | async"></app-pretty-json>
+</app-card>

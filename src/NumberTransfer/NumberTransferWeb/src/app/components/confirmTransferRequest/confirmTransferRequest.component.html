@@ -1,0 +1,20 @@
+<app-card title="Confirm Transfer">
+  <p>
+    Confirms a transfer request from an owner to another owner.
+  </p>
+
+  <form novalidate (ngSubmit)="confirmTransferRequest()">
+    <div class="tt__input tt__input--text">
+      <label for="newOwner">New Owner</label>
+      <input type="text" id="newOwner" name="newOwner" required [(ngModel)]="newOwner">
+    </div>
+    <div class="tt__input tt__input--text">
+      <label for="phoneNumber">Phone Number</label>
+      <input type="text" id="phoneNumber" name="phoneNumber" required [(ngModel)]="phoneNumber">
+    </div>
+
+    <button class="tiny" type="submit">Execute</button>
+  </form>
+
+  <app-pretty-json [result]="httpResult$ | async"></app-pretty-json>
+</app-card>

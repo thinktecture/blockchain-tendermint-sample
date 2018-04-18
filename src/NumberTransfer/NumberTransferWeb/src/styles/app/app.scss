@@ -1,0 +1,39 @@
+.button-container {
+  display: flex;
+  justify-content: space-between;
+
+  a.button[href] {
+    height: auto;
+    padding: 0.5rem 1rem;
+  }
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+
+  input {
+    flex: 1;
+  }
+
+  button[type='submit'] {
+    margin-left: auto;
+    margin-top: 1rem;
+  }
+}
+
+.tt__card {
+  header {
+    h1 {
+      margin: 0;
+    }
+  }
+
+  .content {
+    margin: 0;
+
+    p:first-child {
+      padding-top: 3rem;
+    }
+  }
+}

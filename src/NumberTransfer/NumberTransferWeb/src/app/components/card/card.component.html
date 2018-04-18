@@ -1,0 +1,8 @@
+<div class="tt__card">
+  <header (click)="toggle()">
+    <h1>{{ title }}</h1>
+  </header>
+  <div class="content" [@expandable]="isOpen" *ngIf="isOpen">
+    <ng-content></ng-content>
+  </div>
+</div>

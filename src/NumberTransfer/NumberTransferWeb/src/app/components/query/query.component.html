@@ -1,0 +1,25 @@
+<app-card title="Query">
+  <p>
+    Generic query interface. Possible commands:
+  </p>
+
+  <ul class="tt__list">
+    <li><strong (click)="dumpRepository()">dump-repository</strong>: Returns the current content of the storage.</li>
+    <li><strong (click)="openTransfers()">open-transfers(partyName)</strong>: Returns all not yet processed transfer requests for a given party.</li>
+  </ul>
+
+  <form novalidate (ngSubmit)="query()">
+    <div class="tt__input tt__input--text">
+      <label for="command">command</label>
+      <input type="text" id="command" name="command" required [(ngModel)]="command">
+    </div>
+    <div class="tt__input tt__input--text">
+      <label for="data">Data</label>
+      <input type="text" id="data" name="data" required [(ngModel)]="data">
+    </div>
+
+    <button class="tiny" type="submit">Execute</button>
+  </form>
+
+  <app-pretty-json [result]="httpResult$ | async" style="display: block; overflow-x: scroll"></app-pretty-json>
+</app-card>
