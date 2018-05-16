@@ -20,12 +20,12 @@ namespace NumberTransfer.QueryProcessing
             _callNumberRepository = callNumberRepository;
         }
 
-        public Task<ResponseQuery> Handle(RequestQuery query, ServerCallContext context)
+        public async Task<ResponseQuery> Handle(RequestQuery query, ServerCallContext context)
         {
             var list = new List<CallNumber>(_callNumberRepository.List().OrderBy(p => p.PhoneNumber));
             var resultString = JsonConvert.SerializeObject(list);
 
-            return Task.FromResult(ResponseHelper.Query.Ok(resultString.ToByteString()));
+            return await Task.FromResult(ResponseHelper.Query.Ok(resultString.ToByteString()));
         }
     }
 }

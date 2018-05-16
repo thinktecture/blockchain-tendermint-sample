@@ -49,6 +49,7 @@ namespace NumberTransfer
         private static void ConfigureTransactionHandlers(ServiceCollection serviceCollection)
         {
             serviceCollection.AddSingleton<TransactionHandlerFactory>();
+            serviceCollection.AddScoped<ITransactionHandler<CreateNumber>, CreateNumberHandler>();
             serviceCollection.AddTransient<ITransactionHandler<CreateNumber>, CreateNumberHandler>();
             serviceCollection.AddTransient<ITransactionHandler<ConfirmTransferRequest>, ConfirmTransferRequestHandler>();
             serviceCollection.AddTransient<ITransactionHandler<DenyTransferRequest>, DenyTransferRequestHandler>();

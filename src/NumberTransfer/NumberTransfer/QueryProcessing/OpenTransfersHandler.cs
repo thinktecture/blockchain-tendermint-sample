@@ -30,7 +30,7 @@ namespace NumberTransfer.QueryProcessing
             var openRequests = _callNumberRepository.List().Where(number => number.Owner == party && number.TransferRequestStarted.HasValue).OrderBy(p => p.PhoneNumber);
             var jsonString = JsonConvert.SerializeObject(openRequests);
 
-            return ResponseHelper.Query.Ok(jsonString.ToByteString());
+            return await Task.FromResult(ResponseHelper.Query.Ok(jsonString.ToByteString()));
         }
     }
 }

@@ -9,7 +9,7 @@ using Types;
 
 namespace NumberTransfer.TransactionHandlers
 {
-    public class CreateNumberHandler : TransactionHandlerBase<CreateNumber>
+    public class CreateNumberHandler : ITransactionHandler<CreateNumber>
     {
         private readonly TransactionTokenValidationService _transactionTokenValidationService;
         private readonly ICallNumberRepository _callNumberRepository;
@@ -31,14 +31,13 @@ namespace NumberTransfer.TransactionHandlers
             return token.IsValid;
         }
 
-        protected override async Task<ResponseCheckTx> CheckTx(TransactionToken transactionToken, CreateNumber payload, RequestCheckTx request,
-            ServerCallContext context)
+        public async Task<ResponseCheckTx> CheckTx(TransactionToken transactionToken, CreateNumber payload, RequestCheckTx request, ServerCallContext context)
         {
             if (!IsVerifiedCaller(transactionToken))
             {
                 return ResponseHelper.Check.Unauthorized();
             }
-            
+
             _logger.LogInformation("Received valid CheckTx request");
 
             var result = await _callNumberRepository.Get(payload.PhoneNumber);
@@ -47,14 +46,13 @@ namespace NumberTransfer.TransactionHandlers
             return ResponseHelper.Check.Create(result == null ? CodeType.Ok : CodeType.PhoneNumberAlreadyExists, result == null ? "" : "Phonenumber already exists.");
         }
 
-        protected override async Task<ResponseDeliverTx> DeliverTx(TransactionToken transactionToken, CreateNumber payload, RequestDeliverTx request,
-            ServerCallContext context)
+        public async Task<ResponseDeliverTx> DeliverTx(TransactionToken transactionToken, CreateNumber payload, RequestDeliverTx request, ServerCallContext context)
         {
             if (!IsVerifiedCaller(transactionToken))
             {
                 return ResponseHelper.Deliver.Unauthorized();
             }
-            
+
             _logger.LogInformation("Received valid DeliverTx request");
 
             await _callNumberRepository.Add(new CallNumber()

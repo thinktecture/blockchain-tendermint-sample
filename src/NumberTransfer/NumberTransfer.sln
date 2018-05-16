@@ -1,15 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.0.0
-MinimumVisualStudioVersion = 10.0.0.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tendermint", "..\Tendermint\Tendermint.csproj", "{04AC0665-07B2-4F0D-B82F-98B13E1F7A18}"
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2037
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tendermint", "..\Tendermint\Tendermint.csproj", "{04AC0665-07B2-4F0D-B82F-98B13E1F7A18}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DebugRequestCreator", "DebugRequestCreator\DebugRequestCreator.csproj", "{0FCC2DD8-4F63-4EB7-BB10-CD4C78C9D00A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DebugRequestCreator", "DebugRequestCreator\DebugRequestCreator.csproj", "{0FCC2DD8-4F63-4EB7-BB10-CD4C78C9D00A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumberTransfer", "NumberTransfer\NumberTransfer.csproj", "{93038B2F-AE53-4802-B80B-CCA65B08692E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NumberTransfer", "NumberTransfer\NumberTransfer.csproj", "{93038B2F-AE53-4802-B80B-CCA65B08692E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumberTransferWebApi", "NumberTransferWebApi\NumberTransferWebApi.csproj", "{DBFE8B64-5E87-4856-8BBC-402725DEC295}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NumberTransferWebApi", "NumberTransferWebApi\NumberTransferWebApi.csproj", "{DBFE8B64-5E87-4856-8BBC-402725DEC295}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumberTransfer.Test", "NumberTransfer.Test\NumberTransfer.Test.csproj", "{B77BB0BD-0030-4878-8461-AACE92DB4FB7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,8 +35,15 @@ Global
 		{DBFE8B64-5E87-4856-8BBC-402725DEC295}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DBFE8B64-5E87-4856-8BBC-402725DEC295}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DBFE8B64-5E87-4856-8BBC-402725DEC295}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B77BB0BD-0030-4878-8461-AACE92DB4FB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B77BB0BD-0030-4878-8461-AACE92DB4FB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B77BB0BD-0030-4878-8461-AACE92DB4FB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B77BB0BD-0030-4878-8461-AACE92DB4FB7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C4E3074D-10B3-401C-BEA0-082FBB45F22B}
 	EndGlobalSection
 EndGlobal

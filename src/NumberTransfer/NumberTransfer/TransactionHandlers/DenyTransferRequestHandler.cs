@@ -7,7 +7,7 @@ using Types;
 
 namespace NumberTransfer.TransactionHandlers
 {
-    public class DenyTransferRequestHandler : TransactionHandlerBase<DenyTransferRequest>
+    public class DenyTransferRequestHandler : ITransactionHandler<DenyTransferRequest>
     {
         private readonly TransactionTokenValidationService _transactionTokenValidationService;
         private readonly ICallNumberRepository _callNumberRepository;
@@ -19,8 +19,7 @@ namespace NumberTransfer.TransactionHandlers
             _callNumberRepository = callNumberRepository;
         }
 
-        protected override async Task<ResponseCheckTx> CheckTx(TransactionToken transactionToken, DenyTransferRequest payload, RequestCheckTx request,
-            ServerCallContext context)
+        public async Task<ResponseCheckTx> CheckTx(TransactionToken transactionToken, DenyTransferRequest payload, RequestCheckTx request, ServerCallContext context)
         {
             var callNumber = await _callNumberRepository.Get(payload.PhoneNumber);
 
@@ -54,8 +53,7 @@ namespace NumberTransfer.TransactionHandlers
             return token.IsValid;
         }
 
-        protected override async Task<ResponseDeliverTx> DeliverTx(TransactionToken transactionToken, DenyTransferRequest payload, RequestDeliverTx request,
-            ServerCallContext context)
+        public async Task<ResponseDeliverTx> DeliverTx(TransactionToken transactionToken, DenyTransferRequest payload, RequestDeliverTx request, ServerCallContext context)
         {
             var callNumber = await _callNumberRepository.Get(payload.PhoneNumber);
 

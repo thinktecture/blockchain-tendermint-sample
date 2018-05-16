@@ -47,20 +47,17 @@ namespace NumberTransfer.TransactionHandlers
             _blockchainMetadata.Hash = hashByteString;
             _blockchainMetadata.Height++;
 
-            return new ResponseCommit()
-            {
-                Data = hashByteString
-            };
+            return await Task.FromResult(new ResponseCommit { Data = hashByteString });
         }
 
-        public async Task<ResponseInfo> Info(RequestInfo request, ServerCallContext context) => new ResponseInfo()
+        public async Task<ResponseInfo> Info(RequestInfo request, ServerCallContext context) => await Task.FromResult(new ResponseInfo()
         {
             LastBlockAppHash = _blockchainMetadata.Hash ?? ByteString.Empty,
             LastBlockHeight = _blockchainMetadata.Height
-        };
+        });
 
-        public async Task<ResponseEndBlock> EndBlock(RequestEndBlock request, ServerCallContext context) => new ResponseEndBlock();
+        public async Task<ResponseEndBlock> EndBlock(RequestEndBlock request, ServerCallContext context) => await Task.FromResult(new ResponseEndBlock());
 
-        public async Task<ResponseBeginBlock> BeginBlock(RequestBeginBlock request, ServerCallContext context) => new ResponseBeginBlock();
+        public async Task<ResponseBeginBlock> BeginBlock(RequestBeginBlock request, ServerCallContext context) => await Task.FromResult(new ResponseBeginBlock());
     }
 }

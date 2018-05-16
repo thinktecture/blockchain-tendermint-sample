@@ -1,5 +1,4 @@
 ﻿using System;
-using NumberTransfer.Transactions;
 
 namespace NumberTransfer.TransactionHandlers
 {
@@ -12,11 +11,13 @@ namespace NumberTransfer.TransactionHandlers
             _serviceProvider = serviceProvider;
         }
 
-        public ITransactionHandler CreateHandlerFor<T>(T payload)
-            where T : BaseTransaction
+        public ITransactionHandler<T> CreateHandlerFor<T>(T payload)
         {
-            var type = typeof(ITransactionHandler<>).MakeGenericType(payload.GetType());
-            return _serviceProvider.GetService(type) as ITransactionHandler;
+            var handler = _serviceProvider
+                .GetService(typeof(ITransactionHandler<T>))
+                as ITransactionHandler<T>;
+            return handler;
         }
+
     }
 }

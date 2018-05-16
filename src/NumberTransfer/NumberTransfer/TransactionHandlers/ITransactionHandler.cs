@@ -5,15 +5,9 @@ using Types;
 
 namespace NumberTransfer.TransactionHandlers
 {
-    public interface ITransactionHandler
+    public interface ITransactionHandler<in T>
     {
-        Task<ResponseCheckTx> CheckTx(TransactionToken transactionToken, BaseTransaction data, RequestCheckTx request, ServerCallContext context);
-        Task<ResponseDeliverTx> DeliverTx(TransactionToken transactionToken, BaseTransaction data, RequestDeliverTx request, ServerCallContext context);
-    }
-
-    public interface ITransactionHandler<T> : ITransactionHandler
-        where T: BaseTransaction 
-    {
-        // Marker interface
+        Task<ResponseCheckTx> CheckTx(TransactionToken transactionToken, T data, RequestCheckTx request, ServerCallContext context);
+        Task<ResponseDeliverTx> DeliverTx(TransactionToken transactionToken, T data, RequestDeliverTx request, ServerCallContext context);
     }
 }

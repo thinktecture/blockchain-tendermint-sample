@@ -9,7 +9,7 @@ using Types;
 namespace NumberTransfer.TransactionHandlers
 {
     // TODO: Do we need to check currentOwner somehow?
-    public class RequestTransferHandler : TransactionHandlerBase<RequestTransfer>
+    public class RequestTransferHandler : ITransactionHandler<RequestTransfer>
     {
         private readonly TransactionTokenValidationService _transactionTokenValidationService;
         private readonly ICallNumberRepository _callNumberRepository;
@@ -24,8 +24,7 @@ namespace NumberTransfer.TransactionHandlers
             _logger = logger;
         }
 
-        protected override async Task<ResponseCheckTx> CheckTx(TransactionToken transactionToken, RequestTransfer payload, RequestCheckTx request,
-            ServerCallContext context)
+        public async Task<ResponseCheckTx> CheckTx(TransactionToken transactionToken, RequestTransfer payload, RequestCheckTx request, ServerCallContext context)
         {
             if (!IsVerifiedCaller(transactionToken, payload.NewOwner))
             {
@@ -58,8 +57,7 @@ namespace NumberTransfer.TransactionHandlers
             return token.IsValid;
         }
 
-        protected override async Task<ResponseDeliverTx> DeliverTx(TransactionToken transactionToken, RequestTransfer payload, RequestDeliverTx request,
-            ServerCallContext context)
+        public async Task<ResponseDeliverTx> DeliverTx(TransactionToken transactionToken, RequestTransfer payload, RequestDeliverTx request, ServerCallContext context)
         {
             if (!IsVerifiedCaller(transactionToken, payload.NewOwner))
             {
